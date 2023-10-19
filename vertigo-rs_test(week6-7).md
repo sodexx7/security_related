@@ -20,16 +20,17 @@ Killed:                 25 / 54
 
 ## vertigo check based on the foundry coverage
 
-[forge-coverage](https://github.com/sodexx7/Week2_NFT_Staking_Security/blob/main/StaticAnalysisAndMutationTesting/forge-coverage.png)
+![forge-coverage](https://github.com/sodexx7/Week2_NFT_Staking_Security/blob/main/StaticAnalysisAndMutationTesting/forge-coverage.png)
+
 
 * tips: there are two branch can't cover
 
 ![forge-coverage-uncoverbranch1](https://github.com/sodexx7/Week2_NFT_Staking_Security/blob/main/StaticAnalysisAndMutationTesting/uncover_branch(1).png)
-[StakingContract](https://github.com/sodexx7/Week2_NFT_Staking_Security/blob/main/coverage/src/SmartContractTrio/src/SmartContractTrio/StakingContract.sol.gcov.html)
+- [StakingContract](https://github.com/sodexx7/Week2_NFT_Staking_Security/blob/main/coverage/src/SmartContractTrio/src/SmartContractTrio/StakingContract.sol.gcov.html)
 
 
 ![forge-coverage-uncoverbranch2](https://github.com/sodexx7/Week2_NFT_Staking_Security/blob/main/StaticAnalysisAndMutationTesting/uncover_branch(2).png)
-[NFT721](https://github.com/sodexx7/Week2_NFT_Staking_Security/blob/main/coverage/src/SmartContractTrio/src/SmartContractTrio/NFT721.sol.gcov.html)
+- [NFT721](https://github.com/sodexx7/Week2_NFT_Staking_Security/blob/main/coverage/src/SmartContractTrio/src/SmartContractTrio/NFT721.sol.gcov.html)
 
 
 
