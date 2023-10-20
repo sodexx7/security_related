@@ -29,8 +29,17 @@ contract ExploitContract {
     bytes32 answerHash =
         0xdb81b4d58595fbbbb592d3661a34cdca14d7ab379441400cbfa1b78bc447c365;
 
+    /**
+    1.First get the slot 0's value at the GuessTheSecretNumber's address, which can get by the testStorage funciton in GuessSecretNumberTest, There Have been applied.
+    2.Because the the password's type is uint8, so the max value is 255. just use the brute way to break down the password like below code.
+     */
     function Exploiter() public view returns (uint8) {
         uint8 n;
+
+        while(keccak256(abi.encodePacked(n)) != answerHash){
+            ++n;
+        }
+
         return n;
     }
 }

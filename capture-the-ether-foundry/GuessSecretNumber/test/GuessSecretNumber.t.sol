@@ -5,6 +5,8 @@ import "forge-std/Test.sol";
 import "forge-std/console.sol";
 import "../src/GuessSecretNumber.sol";
 
+
+
 contract GuessSecretNumberTest is Test {
     ExploitContract exploitContract;
     GuessTheSecretNumber guessTheSecretNumber;
@@ -15,6 +17,7 @@ contract GuessSecretNumberTest is Test {
 
         // Deploy "ExploitContract"
         exploitContract = new ExploitContract();
+
     }
 
     function testFindSecretNumber() public {
@@ -32,4 +35,10 @@ contract GuessSecretNumberTest is Test {
     }
 
     receive() external payable {}
+
+    function testStorage() private {
+  
+        bytes32 slotOvalue = vm.load(address(guessTheSecretNumber),bytes32(uint(0)));
+        console.logBytes32(slotOvalue);
+    }
 }
