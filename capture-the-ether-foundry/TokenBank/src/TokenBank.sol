@@ -141,14 +141,8 @@ contract TokenBankAttacker {
         challenge = TokenBankChallenge(challengeAddress);
     }
     // Write your exploit functions here
-
-    // todo, player, current address
     function atttack() external {
-        // make the balanceOf[player] for TokenBankChallenge , acheive the amout:1,000,000 tokens
-        challenge.addcontract(challenge.player);
-
+      
         
-
-
     }
 }

