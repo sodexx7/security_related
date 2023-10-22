@@ -1,7 +1,12 @@
+// SPDX-License-Identifier: AGPL-3.0
 pragma solidity 0.7.5;
 
 contract Ownable {
     address public owner = msg.sender;
+
+    function transferOwnership(address newOwner) public onlyOwner {
+        owner = newOwner;
+    }
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Ownable: Caller is not the owner.");
@@ -33,23 +38,9 @@ contract Pausable is Ownable {
 contract Token is Ownable, Pausable {
     mapping(address => uint256) public balances;
 
-    // function transfer(address to, uint256 value) public whenNotPaused {
-    //     balances[msg.sender] -= value;
-    //     balances[to] += value;
-    // }
-
-    // one way to solve the bug
-    function transfer(address to, uint256 value) public whenNotPaused {
-        uint msgbeforeBalance = balances[msg.sender];
-        uint tobeforeBalance = balances[msg.sender];
+    function transfer(address to, uint256 value) public virtual whenNotPaused {
+        require(balances[msg.sender] >= value); //solution
         balances[msg.sender] -= value;
-        require(msgbeforeBalance >= balances[msg.sender]); // overflow check 
         balances[to] += value;
-        require(balances[to] <= tobeforeBalance); //overflow check
     }
-
-    // function transfer(address to, uint256 value) public whenNotPaused {
-    //     balances[msg.sender] -= value;
-    //     balances[to] += value;
-    // }
 }

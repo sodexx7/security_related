@@ -19,8 +19,8 @@ contract TestToken is Token {
     
 
     // echidna EchidnaTest/solution2.sol --test-mode assertion
-    function testPaused(uint amount) public {
-        assert(paused());
-    }
+    // function testPaused(uint amount) public {
+    //     assert(paused());
+    // }
     
 }
