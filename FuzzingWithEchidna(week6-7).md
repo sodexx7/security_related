@@ -10,6 +10,6 @@
     * [token](https://github.com/sodexx7/security_related/blob/main/Ehidna_test_execrice/src/token4.sol#L38)
 5. [TokenWhaleChallenge_solution](https://github.com/sodexx7/security_related/blob/main/Ehidna_test_execrice/EchidnaTest/TokenWhaleChallenge_solution.sol#L18)
     * [TokenWhaleChallenge](Ehidna_test_execrice/src/TokenWhaleChallenge.sol)
-    * related CFT [Token Whale](https://github.com/sodexx7/security_related/blob/dfa4a6193d9d7f1482240c6cce8f3b2b184d3bfb/capture-the-ether-foundry/TokenWhale/test/TokenWhale.t.sol#L27)
+    * related CFT [Token Whale](capture-the-ether-foundry/TokenWhale/test/TokenWhale.t.sol)
 
 
