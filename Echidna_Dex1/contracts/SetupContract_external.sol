@@ -61,8 +61,8 @@ contract SetupContract  {
         require(msg.sender == address(0x10000));
         
         require( (from == instance.token1() && to == instance.token2()) || (from == instance.token2() && to == instance.token1()));
-        // require(IERC20(from).balanceOf(address(this)) >= amount && amount > 0 );
         uint amount = IERC20(from).balanceOf(address(this));
+        // require(amount <=amountBalance);
 
         uint beforeAmountForFrom = instance.balanceOf(from,address(instance));
         uint beforedAmountForTo = instance.balanceOf(to,address(instance));

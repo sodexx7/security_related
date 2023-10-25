@@ -5,4 +5,4 @@ cryticArgs: ['--solc-remaps', '@=node_modules/@']
 testMode: assertion
 corpusDir: corpus
 seqLen: 1000
-sender: ["0x30000"]
+sender: ["0x10000"]

@@ -51,6 +51,7 @@ contract SetupContract is Dex {
 
         require( (from == token1 && to == token2) || (from == token2 && to == token1));
         uint amount = balanceOf(from,msg.sender);
+        // require(amount<=amountBalace);
 
         uint swapAmount = getSwapPrice(from, to, amount);
         require(swapAmount>0);
