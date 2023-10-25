@@ -12,4 +12,12 @@
     * [TokenWhaleChallenge](Ehidna_test_execrice/src/TokenWhaleChallenge.sol)
     * related CFT [Token Whale](capture-the-ether-foundry/TokenWhale/test/TokenWhale.t.sol)
 
+6. [DEX 1 from Caputre the Ether](ThefuzzerFound(week6-7).md)
+
+7. [BondingCurveEchidnaTest](https://github.com/sodexx7/week1_ERC1363_Tokens_and_Bonding_Curves/blob/main/EchidnaTest/echidnaTest.md)
+
+
+
+## TODO
+https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises
 

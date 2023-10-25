@@ -40,4 +40,3 @@
 
 * **Internal test**
 <img src="Echidna_Dex1/TestResult/internal_result.png" alt="external_result" width="1000"/>
-

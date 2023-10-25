@@ -40,5 +40,3 @@ The mythx's results almost involved explicitly setting the visibility of state v
 * [Mutation_testing](https://en.wikipedia.org/wiki/Mutation_testing)
 
 
-## TODO
-https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises
