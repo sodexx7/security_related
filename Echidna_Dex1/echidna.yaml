@@ -1,0 +1,8 @@
+# https://github.com/crytic/echidna/wiki/Config
+# provide solc remappings to crytic-compile
+
+cryticArgs: ['--solc-remaps', '@=node_modules/@']
+testMode: assertion
+corpusDir: corpus
+seqLen: 1000
+sender: ["0x30000"]
