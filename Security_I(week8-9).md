@@ -15,4 +15,7 @@
 6. [Predict the block hash](https://github.com/sodexx7/security_related/blob/dfa4a6193d9d7f1482240c6cce8f3b2b184d3bfb/capture-the-ether-foundry/PredictTheBlockhash/test/PredictTheBlockhash.t.sol#L28)
 
 7. [Token Whale](capture-the-ether-foundry/TokenWhale/test/TokenWhale.t.sol)
+
+8. [TokenSale](https://github.com/sodexx7/security_related/blob/main/capture-the-ether-foundry/TokenSale/src/TokenSale.sol)
+    [TokenSale.t.sol](https://github.com/sodexx7/security_related/blob/main/capture-the-ether-foundry/TokenSale/test/TokenSale.t.sol)
     
