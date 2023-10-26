@@ -14,13 +14,24 @@ contract RetirementFundTest is Test {
         exploitContract = new ExploitContract(retirementFund);
     }
 
+    /**
+        The core logic of the retirementFund is the player can withdraw the RetirementFund's Penalty if the owner withdraw before expiration.
+        The question is even the owner doesn't withdraw before expiration, the play also have the way to withdraw RetirementFund's all eth balance.
+        Just skip two checks:
+        1: require(withdrawn > 0); use selfdestruct to make the RetirementFund's eth balance greater than startBalance, so the withdrawn will greater than 0 
+        even the owner doesn't withdraw before expiration.
+        2: require(msg.sender == beneficiary);  then let the player call collectPenalty()
+    
+     */
     function testIncrement() public {
         vm.deal(address(exploitContract), 1 ether);
         // Test your Exploit Contract below
         // Use the instance retirementFund and exploitContract
 
         // Put your solution here
-
+        exploitContract.exploit();
+        vm.prank(address(this));
+        retirementFund.collectPenalty();
         _checkSolved();
     }
 
