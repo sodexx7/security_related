@@ -21,3 +21,6 @@
 
 9. [RetirementFund](https://github.com/sodexx7/security_related/blob/main/capture-the-ether-foundry/RetirementFund/src/RetirementFund.sol)
     * [RetirementFund.t.sol](https://github.com/sodexx7/security_related/blob/main/capture-the-ether-foundry/RetirementFund/test/RetirementFund.t.sol)
+
+10. [SideEntranceLenderPool](https://github.com/sodexx7/security_related/blob/main/damn-vulnerable-defi/contracts/side-entrance/SideEntranceLenderPool.sol)
+    * [side-entrance.challenge.js](https://github.com/sodexx7/security_related/blob/main/damn-vulnerable-defi/test/side-entrance/side-entrance.challenge.js)
