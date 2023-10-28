@@ -1,4 +1,5 @@
 ## Have Done
+### week1 - week2
 
 1. [GuessSecretNumber](capture-the-ether-foundry/GuessSecretNumber/src/GuessSecretNumber.sol)
 
@@ -30,3 +31,6 @@
 
 12. [DenialAttack2](https://github.com/sodexx7/security_related/blob/main/ethernaut/contracts/contracts/attacks/MySolution/DenialAttack2.sol)
     * yarn hardhat test test/levels/Denial.test.js
+
+13. [NaughtCoinAttack2](https://github.com/sodexx7/security_related/blob/main/ethernaut/contracts/contracts/attacks/MySolution/NaughtCoinAttack2.sol)
+    * yarn hardhat test test/levels/NaughtCoin.test.js

@@ -1,6 +1,6 @@
 const NaughtCoin = artifacts.require('./levels/NaughtCoin.sol');
 const NaughtCoinFactory = artifacts.require('./levels/NaughtCoinFactory.sol');
-const NaughtCoinAttack = artifacts.require('./attacks/NaughtCoinAttack.sol');
+const NaughtCoinAttack2 = artifacts.require('./attacks/NaughtCoinAttack2.sol');
 
 const Ethernaut = artifacts.require('./Ethernaut.sol');
 const {
@@ -50,7 +50,7 @@ contract('NaughtCoin', function (accounts) {
       player,
       NaughtCoin
     );
-    const attacker = await NaughtCoinAttack.new();
+    const attacker = await NaughtCoinAttack2.new();
 
     // Allow the contract to call transfer tokens on your behalf, transferFrom has a different implementation to transfer, so it will be allowed
     let balance = await instance.balanceOf(player);
