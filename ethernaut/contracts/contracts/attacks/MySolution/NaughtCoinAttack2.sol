@@ -9,7 +9,8 @@ contract NaughtCoinAttack2 {
 
     /**
     The viticm's contract inherited ERC20, which transfer token have two way: one is transfer(),another is transferFrom.
-    Although the transfer has add the check logic,but transferFrom is public in its parent contract, so anyone can call transferFrom function.
+    Although the transfer has add the check logic for the player,but transferFrom is public in its parent contract, 
+    so anyone can call transferFrom function and no same check as transfer funtion.
     So the attack logic:
         1: approve other contract,such as this attackContract have the rights to transfer token.
         2: Make this attack contract call transferFrom() function to transfer all the plaer's ERC20 token to this address.
