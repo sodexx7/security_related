@@ -27,3 +27,6 @@
 
 11. [unstoppable.challenge.js](https://github.com/sodexx7/security_related/blob/main/damn-vulnerable-defi/test/unstoppable/unstoppable.challenge.js)
     * [UnstoppableVault](https://github.com/sodexx7/security_related/blob/6b05488ab61e319578391e24040ac22251e9f3e3/damn-vulnerable-defi/contracts/unstoppable/UnstoppableVault.sol)
+
+12. [DenialAttack2](https://github.com/sodexx7/security_related/blob/main/ethernaut/contracts/contracts/attacks/MySolution/DenialAttack2.sol)
+    * yarn hardhat test test/levels/Denial.test.js
