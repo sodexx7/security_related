@@ -24,3 +24,6 @@
 
 10. [SideEntranceLenderPool](https://github.com/sodexx7/security_related/blob/main/damn-vulnerable-defi/contracts/side-entrance/SideEntranceLenderPool.sol)
     * [side-entrance.challenge.js](https://github.com/sodexx7/security_related/blob/main/damn-vulnerable-defi/test/side-entrance/side-entrance.challenge.js)
+
+11. [unstoppable.challenge.js](https://github.com/sodexx7/security_related/blob/main/damn-vulnerable-defi/test/unstoppable/unstoppable.challenge.js)
+    * [UnstoppableVault](https://github.com/sodexx7/security_related/blob/6b05488ab61e319578391e24040ac22251e9f3e3/damn-vulnerable-defi/contracts/unstoppable/UnstoppableVault.sol)
