@@ -9,6 +9,7 @@
     * [PredictTheFuture.t.sol](capture-the-ether-foundry/PredictTheFuture/test/PredictTheFuture.t.sol)
 
 4. [RareSkills Riddles: ERC1155](solidity-riddles/contracts/Attacker/Overmint1_ERC1155_Attacker.sol)
+    * npx hardhat test test/Overmint1-ERC1155.js
 
 
 5. [Token Bank](capture-the-ether-foundry/TokenBank/test/TokenBank.t.sol) 

