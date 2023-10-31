@@ -16,10 +16,9 @@ contract TrusterLenderPoolAttacker {
     address _player;
     uint _flashloanAmount;
 
-    constructor(address trusterLenderPoolAddress,address damnValuableTokenAddress,address player,uint flashloanAmount){
+    constructor(address trusterLenderPoolAddress,address damnValuableTokenAddress,uint flashloanAmount){
         _trusterLenderPool = TrusterLenderPool(trusterLenderPoolAddress);
         _damnValuableToken = DamnValuableToken(damnValuableTokenAddress);
-        _player = player;
         _flashloanAmount = flashloanAmount;
 
     }
