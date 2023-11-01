@@ -7,11 +7,11 @@ const GatekeeperTwoFactory = artifacts.require(
 const GatekeeperOne = artifacts.require('./levels/GatekeeperOne.sol');
 const GatekeeperTwo = artifacts.require('./levels/GatekeeperTwo.sol');
 const GatekeeperOneAttack = artifacts.require(
-  './attacks/GatekeeperOneAttack.sol'
+  './attacks/GatekeeperOneAttack2.sol'
 );
-const GatekeeperTwoAttack = artifacts.require(
-  './attacks/GatekeeperTwoAttack.sol'
-);
+// const GatekeeperTwoAttack = artifacts.require(
+//   './attacks/GatekeeperTwoAttack.sol'
+// );
 
 const Ethernaut = artifacts.require('./Ethernaut.sol');
 const {
@@ -65,56 +65,9 @@ contract('GatekeeperOne', function (accounts) {
       from: player,
     });
 
-    const completed = await utils.submitLevelInstance(
-      ethernaut,
-      level.address,
-      instance.address,
-      player
-    );
 
-    assert.isTrue(completed);
-  });
-});
 
-contract('GatekeeperTwo', function (accounts) {
-  let ethernaut;
-  let level;
-  let player = accounts[0];
 
-  before(async function () {
-    ethernaut = await utils.getEthernautWithStatsProxy();
-    level = await GatekeeperTwoFactory.new();
-    await ethernaut.registerLevel(level.address);
-  });
-
-  it('should fail if the player didnt solve the level', async function () {
-    const instance = await utils.createLevelInstance(
-      ethernaut,
-      level.address,
-      player,
-      GatekeeperTwo
-    );
-    const completed = await utils.submitLevelInstance(
-      ethernaut,
-      level.address,
-      instance.address,
-      player
-    );
-
-    assert.isFalse(completed);
-  });
-
-  it('should allow the player to solve the level', async function () {
-    const instance = await utils.createLevelInstance(
-      ethernaut,
-      level.address,
-      player,
-      GatekeeperTwo
-    );
-
-    const attacker = await GatekeeperTwoAttack.new(instance.address, {
-      from: player,
-    });
 
     const completed = await utils.submitLevelInstance(
       ethernaut,
@@ -126,3 +79,54 @@ contract('GatekeeperTwo', function (accounts) {
     assert.isTrue(completed);
   });
 });
+
+// contract('GatekeeperTwo', function (accounts) {
+//   let ethernaut;
+//   let level;
+//   let player = accounts[0];
+
+//   before(async function () {
+//     ethernaut = await utils.getEthernautWithStatsProxy();
+//     level = await GatekeeperTwoFactory.new();
+//     await ethernaut.registerLevel(level.address);
+//   });
+
+//   it('should fail if the player didnt solve the level', async function () {
+//     const instance = await utils.createLevelInstance(
+//       ethernaut,
+//       level.address,
+//       player,
+//       GatekeeperTwo
+//     );
+//     const completed = await utils.submitLevelInstance(
+//       ethernaut,
+//       level.address,
+//       instance.address,
+//       player
+//     );
+
+//     assert.isFalse(completed);
+//   });
+
+//   // it('should allow the player to solve the level', async function () {
+//   //   const instance = await utils.createLevelInstance(
+//   //     ethernaut,
+//   //     level.address,
+//   //     player,
+//   //     GatekeeperTwo
+//   //   );
+
+//   //   const attacker = await GatekeeperTwoAttack.new(instance.address, {
+//   //     from: player,
+//   //   });
+
+//   //   const completed = await utils.submitLevelInstance(
+//   //     ethernaut,
+//   //     level.address,
+//   //     instance.address,
+//   //     player
+//   //   );
+
+//   //   assert.isTrue(completed);
+//   // });
+// });

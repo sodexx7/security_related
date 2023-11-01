@@ -16,3 +16,8 @@
 4. [Democracy.js](https://github.com/sodexx7/security_related/blob/main/solidity-riddles/test/Democracy.js)
     * [Democracy.sol](solidity-riddles/contracts/Democracy.sol) 
     * npx hardhat test test/Democracy.js
+
+
+4. [GatekeeperOneAttack2.sol](https://github.com/sodexx7/security_related/blob/main/ethernaut/contracts/contracts/attacks/MySolution/GatekeeperOneAttack2.sol)
+    * [GatekeeperOne.sol](https://github.com/sodexx7/security_related/blob/main/ethernaut/contracts/contracts/levels/GatekeeperOne.sol) 
+    * npx hardhat test test/levels/Gatekeeper.test.js
