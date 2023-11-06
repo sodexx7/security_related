@@ -21,3 +21,9 @@
 4. [GatekeeperOneAttack2.sol](https://github.com/sodexx7/security_related/blob/main/ethernaut/contracts/contracts/attacks/MySolution/GatekeeperOneAttack2.sol)
     * [GatekeeperOne.sol](https://github.com/sodexx7/security_related/blob/main/ethernaut/contracts/contracts/levels/GatekeeperOne.sol) 
     * npx hardhat test test/levels/Gatekeeper.test.js
+
+5. [GovernanceAttacker](solidity-riddles/contracts/Attacker/GovernanceAttacker.sol)    
+    * [Viceroy.js](solidity-riddles/test/Viceroy.js)
+    * [Viceroy_solution_explain](https://github.com/sodexx7/security_related/blob/main/solidity-riddles/contracts/Attacker/Viceroy_README.md)
+    * [Viceroy](solidity-riddles/contracts/Viceroy.sol)
+    
