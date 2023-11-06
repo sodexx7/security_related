@@ -30,3 +30,8 @@
 6. [DexTwoAttackToken2](ethernaut/contracts/contracts/attacks/MySolution/DexTwoAttackToken2.sol) 
     * [DexTwo](ethernaut/contracts/contracts/levels/DexTwo.sol)
     * yarn hardhat test test/levels/DexTwo.test.js
+
+7. [NaiveReceiverAttackContract](damn-vulnerable-defi/contracts/naive-receiver/NaiveReceiverAttackContract.sol)
+    * [naive-receiver.challenge](damn-vulnerable-defi/test/naive-receiver/naive-receiver.challenge.js)
+    * [FlashLoanReceiver](damn-vulnerable-defi/contracts/naive-receiver/FlashLoanReceiver.sol)
+    * npx hardhat test test/naive-receiver/naive-receiver.challenge.js

