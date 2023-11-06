@@ -1,6 +1,6 @@
 const DexTwoFactory = artifacts.require('./levels/DexTwoFactory.sol');
 const SwappableTokenTwo = artifacts.require('SwappableTokenTwo');
-const DexTwoAttackToken = artifacts.require('DexTwoAttackToken');
+const DexTwoAttackToken = artifacts.require('DexTwoAttackToken2');
 const DexTwo = artifacts.require('./levels/DexTwo.sol');
 
 const Ethernaut = artifacts.require('./Ethernaut.sol');
@@ -78,11 +78,11 @@ contract('DexTwo', function (accounts) {
       'InvalidApprover'
     );
 
-    const t = await DexTwoAttackToken.new();
+    const t = await DexTwoAttackToken.new(instance.address);
 
     // Drain funds through swap
     await instance.swap(t.address, token1.address, 1, { from: player });
-    await instance.swap(t.address, token2.address, 1, { from: player });
+    await instance.swap(t.address, token2.address, 2, { from: player });
     dexBalances = await Promise.all([
       token1.balanceOf(instance.address),
       token2.balanceOf(instance.address),

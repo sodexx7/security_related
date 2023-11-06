@@ -26,4 +26,7 @@
     * [Viceroy.js](solidity-riddles/test/Viceroy.js)
     * [Viceroy_solution_explain](https://github.com/sodexx7/security_related/blob/main/solidity-riddles/contracts/Attacker/Viceroy_README.md)
     * [Viceroy](solidity-riddles/contracts/Viceroy.sol)
-    
+
+6. [DexTwoAttackToken2](ethernaut/contracts/contracts/attacks/MySolution/DexTwoAttackToken2.sol) 
+    * [DexTwo](ethernaut/contracts/contracts/levels/DexTwo.sol)
+    * yarn hardhat test test/levels/DexTwo.test.js
