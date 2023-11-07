@@ -35,3 +35,8 @@
     * [naive-receiver.challenge](damn-vulnerable-defi/test/naive-receiver/naive-receiver.challenge.js)
     * [FlashLoanReceiver](damn-vulnerable-defi/contracts/naive-receiver/FlashLoanReceiver.sol)
     * npx hardhat test test/naive-receiver/naive-receiver.challenge.js
+
+8. [RewardTokenAttacker](solidity-riddles/contracts/Attacker/RewardTokenAttacker.sol)
+    * [RewardToken.js](solidity-riddles/test/RewardToken.js)
+    * [RewardToken](solidity-riddles/contracts/RewardToken.sol)
+    * npx hardhat test test/RewardToken.js

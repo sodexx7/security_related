@@ -48,8 +48,27 @@ describe(NAME, function () {
 			} = await loadFixture(setup));
 		});
 
+		/**
+		 * The protocol's desgin as below:
+		 * To ensure fairness, nobody can claim more than half the supply in the contract.
+		 * 
+		 * But there is a vulnerability which means one when one withdrawAndClaimEarnings then he get the rewards and bring back the nft, but at this point the nft data 
+		 * doesn't delete in the Depositoor contract. So this caller can continue call claimEarnings and still get rewards. This means the staker can get the double rewards.
+		 * 
+		 * Hack step:
+		 * 1: stake NFT
+		 * 2: after 5 days, call withdrawAndClaimEarnings. Because the  REWARD_RATE = 10e18 / uint256(1 days); and there are 100e18 in Depositoor contract. so 5 days can get 50e18.
+		 * double withdraw rewards can get all rewards
+		 * 
+		 */
 		// prettier-ignore
 		it("conduct your attack here", async function () {
+
+			await attackerContract.connect(attackerWallet).stakeNFT(depositoorContract.address,42);
+			// assume 5 days passed
+			await time.increase(86400*5);
+
+			await attackerContract.connect(attackerWallet).attack(42);
   
       });
 
