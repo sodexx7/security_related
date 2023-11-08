@@ -63,7 +63,8 @@ contract ReadOnlyPool is ReentrancyGuard, ERC20("LPToken", "LPT") {
     function removeLiquidity() external nonReentrant {
         uint256 numLPTokens = balanceOf(msg.sender);
         uint256 totalLPTokens = totalSupply();
-        uint256 ethToReturn = (originalStake[msg.sender] * (numLPTokens + totalLPTokens)) / totalLPTokens;
+        uint256 ethToReturn = (originalStake[msg.sender] * (numLPTokens + totalLPTokens)) / totalLPTokens; 
+     
 
         originalStake[msg.sender] = 0;
         (bool ok, ) = msg.sender.call{value: ethToReturn}("");

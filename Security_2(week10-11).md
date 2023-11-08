@@ -40,3 +40,8 @@
     * [RewardToken.js](solidity-riddles/test/RewardToken.js)
     * [RewardToken](solidity-riddles/contracts/RewardToken.sol)
     * npx hardhat test test/RewardToken.js
+
+9. [ReadOnlyAttacker](solidity-riddles/contracts/Attacker/ReadOnlyAttacker.sol)
+    * [ReadOnly.js](https://github.com/sodexx7/security_related/blob/main/solidity-riddles/test/ReadOnly.js)
+    * [ReadOnly.sol](solidity-riddles/contracts/ReadOnly.sol)
+    * npx hardhat test test/ReadOnly.js
