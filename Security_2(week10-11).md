@@ -45,3 +45,9 @@
     * [ReadOnly.js](https://github.com/sodexx7/security_related/blob/main/solidity-riddles/test/ReadOnly.js)
     * [ReadOnly.sol](solidity-riddles/contracts/ReadOnly.sol)
     * npx hardhat test test/ReadOnly.js
+
+10. [TheRewarderPoolHacker](damn-vulnerable-defi/contracts/the-rewarder/TheRewarderPoolHacker.sol)
+    * [the-rewarder.challenge.js](damn-vulnerable-defi/test/the-rewarder/the-rewarder.challenge.js)
+    * [TheRewarder_solution_explain](damn-vulnerable-defi/contracts/the-rewarder/Exploit_README.md)
+    * [TheRewarderPool.sol](damn-vulnerable-defi/contracts/the-rewarder/TheRewarderPool.sol)
+    * npx hardhat test test/the-rewarder/the-rewarder.challenge.js

