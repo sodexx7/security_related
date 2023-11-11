@@ -51,3 +51,9 @@
     * [TheRewarder_solution_explain](damn-vulnerable-defi/contracts/the-rewarder/Exploit_README.md)
     * [TheRewarderPool.sol](damn-vulnerable-defi/contracts/the-rewarder/TheRewarderPool.sol)
     * npx hardhat test test/the-rewarder/the-rewarder.challenge.js
+
+11. [SelfiePoolAttacker.sol](damn-vulnerable-defi/contracts/selfie/SelfiePoolAttacker.sol)   
+    * [SelfiePoolAttacker_solution_explain](damn-vulnerable-defi/contracts/selfie/Exlpoit_README.md)
+    * [selfie.challenge.js](damn-vulnerable-defi/test/selfie/selfie.challenge.js)
+    * [SelfiePool.sol](damn-vulnerable-defi/contracts/selfie/SelfiePool.sol)
+    * npx hardhat test test/selfie/selfie.challenge.js

