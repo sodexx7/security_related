@@ -10,8 +10,10 @@
     * [TrusterLenderPool.sol](damn-vulnerable-defi/contracts/truster/TrusterLenderPool.sol)
     * npx hardhat test test/truster/truster.challenge.js
 
-3. [Overmint3.js](https://github.com/sodexx7/security_related/blob/main/solidity-riddles/test/Overmint3.js#L27)  should check the solution is OK？
+3. [Overmint3Attacker.sol](https://github.com/sodexx7/security_related/blob/main/solidity-riddles/contracts/Attacker/Overmint3Attacker.sol#L10)  
+    * [Overmint3.js](solidity-riddles/test/Overmint3.js)
     * [Overmint3.sol](solidity-riddles/contracts/Overmint3.sol)
+    * npx hardhat test test/Overmint3.js
 
 4. [Democracy.js](https://github.com/sodexx7/security_related/blob/main/solidity-riddles/test/Democracy.js)
     * [Democracy.sol](solidity-riddles/contracts/Democracy.sol) 
