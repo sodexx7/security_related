@@ -1,77 +1,144 @@
-const { ethers } = require('hardhat');
-const { expect } = require('chai');
+const { ethers } = require("hardhat");
+const { expect } = require("chai");
 
-describe('[Challenge] Backdoor', function () {
-    let deployer, users, player;
-    let masterCopy, walletFactory, token, walletRegistry;
+describe("[Challenge] Backdoor", function () {
+  let deployer, users, player;
+  let masterCopy, walletFactory, token, walletRegistry;
 
-    const AMOUNT_TOKENS_DISTRIBUTED = 40n * 10n ** 18n;
+  const AMOUNT_TOKENS_DISTRIBUTED = 40n * 10n ** 18n;
 
-    before(async function () {
-        /** SETUP SCENARIO - NO NEED TO CHANGE ANYTHING HERE */
-        [deployer, alice, bob, charlie, david, player] = await ethers.getSigners();
-        users = [alice.address, bob.address, charlie.address, david.address]
+  before(async function () {
+    /** SETUP SCENARIO - NO NEED TO CHANGE ANYTHING HERE */
+    [deployer, alice, bob, charlie, david, player] = await ethers.getSigners();
+    users = [alice.address, bob.address, charlie.address, david.address];
 
-        // Deploy Gnosis Safe master copy and factory contracts
-        masterCopy = await (await ethers.getContractFactory('GnosisSafe', deployer)).deploy();
-        walletFactory = await (await ethers.getContractFactory('GnosisSafeProxyFactory', deployer)).deploy();
-        token = await (await ethers.getContractFactory('DamnValuableToken', deployer)).deploy();
-        
-        // Deploy the registry
-        walletRegistry = await (await ethers.getContractFactory('WalletRegistry', deployer)).deploy(
-            masterCopy.address,
-            walletFactory.address,
-            token.address,
-            users
-        );
-        expect(await walletRegistry.owner()).to.eq(deployer.address);
+    // Deploy Gnosis Safe master copy and factory contracts
+    masterCopy = await (
+      await ethers.getContractFactory("GnosisSafe", deployer)
+    ).deploy();
+    walletFactory = await (
+      await ethers.getContractFactory("GnosisSafeProxyFactory", deployer)
+    ).deploy();
+    token = await (
+      await ethers.getContractFactory("DamnValuableToken", deployer)
+    ).deploy();
 
-        for (let i = 0; i < users.length; i++) {
-            // Users are registered as beneficiaries
-            expect(
-                await walletRegistry.beneficiaries(users[i])
-            ).to.be.true;
+    // Deploy the registry
+    walletRegistry = await (
+      await ethers.getContractFactory("WalletRegistry", deployer)
+    ).deploy(masterCopy.address, walletFactory.address, token.address, users);
+    expect(await walletRegistry.owner()).to.eq(deployer.address);
 
-            // User cannot add beneficiaries
-            await expect(
-                walletRegistry.connect(
-                    await ethers.getSigner(users[i])
-                ).addBeneficiary(users[i])
-            ).to.be.revertedWithCustomError(walletRegistry, 'Unauthorized');
-        }
+    for (let i = 0; i < users.length; i++) {
+      // Users are registered as beneficiaries
+      expect(await walletRegistry.beneficiaries(users[i])).to.be.true;
 
-        // Transfer tokens to be distributed to the registry
-        await token.transfer(walletRegistry.address, AMOUNT_TOKENS_DISTRIBUTED);
-    });
+      // User cannot add beneficiaries
+      await expect(
+        walletRegistry
+          .connect(await ethers.getSigner(users[i]))
+          .addBeneficiary(users[i])
+      ).to.be.revertedWithCustomError(walletRegistry, "Unauthorized");
+    }
 
-    it('Execution', async function () {
-        /** CODE YOUR SOLUTION HERE */
-    });
+    // Transfer tokens to be distributed to the registry
+    await token.transfer(walletRegistry.address, AMOUNT_TOKENS_DISTRIBUTED);
+  });
 
-    after(async function () {
-        /** SUCCESS CONDITIONS - NO NEED TO CHANGE ANYTHING HERE */
+  it("Execution", async function () {
+    /** CODE YOUR SOLUTION HERE */
 
-        // Player must have used a single transaction
-        expect(await ethers.provider.getTransactionCount(player.address)).to.eq(1);
+    let BackDoorAttacker = await (
+      await ethers.getContractFactory("BackDoorAttacker", deployer)
+    ).deploy();
 
-        for (let i = 0; i < users.length; i++) {
-            let wallet = await walletRegistry.wallets(users[i]);
-            
-            // User must have registered a wallet
-            expect(wallet).to.not.eq(
-                ethers.constants.AddressZero,
-                'User did not register a wallet'
-            );
+    await BackDoorAttacker.connect(player).attack(
+      walletFactory.address,
+      walletRegistry.address,
+      masterCopy.address,
+      token.address,
+      users
+    );
 
-            // User is no longer registered as a beneficiary
-            expect(
-                await walletRegistry.beneficiaries(users[i])
-            ).to.be.false;
-        }
+    // blew is my test code, ignore
+    // bytes memory initializer
+    //     address[] calldata _owners,
+    //     uint256 _threshold,
+    //     address to,
+    //     bytes calldata data,
+    //     address fallbackHandler,
+    //     address paymentToken,
+    //     uint256 payment,
+    //     address payable paymentReceiver
 
-        // Player must own all tokens
-        expect(
-            await token.balanceOf(player.address)
-        ).to.eq(AMOUNT_TOKENS_DISTRIBUTED);
-    });
+    // const gnosisSafe = await ethers.getContractAt(
+    //   "GnosisSafe",
+    //   masterCopy.address
+    // );
+
+    // const initializer = gnosisSafe.interface.encodeFunctionData("setup", [
+    //   [alice.address],
+    //   1,
+    //   ethers.constants.AddressZero,
+    //   ethers.constants.HashZero,
+    //   ethers.constants.AddressZero,
+    //   ethers.constants.AddressZero,
+    //   0,
+    //   ethers.constants.AddressZero,
+    // ]);
+
+    // console.log("initializer");
+    // console.log(initializer);
+
+    //     address _singleton,
+    //     bytes memory initializer,
+    //     uint256 saltNonce,
+    //     IProxyCreationCallback callback
+
+    // const tx = await walletFactory.createProxyWithCallback(
+    //   masterCopy.address,
+    //   initializer,
+    //   1,
+    //   walletRegistry.address
+    // );
+    // console.log(tx);
+
+    // // const proxy = await tx.wait();
+    // // console.log(proxy); // show all related txs?
+    // // doing check proxy initiazer function effects
+
+    // // check  alice.address/ the corrospending's proxy contract balance
+    // console.log(await token.balanceOf(proxy.address));
+
+    // const proxyImplementation = await ethers.getContractAt(
+    //   "GnosisSafe",
+    //   proxy.address
+    // );
+    // console.log(proxyImplementation);
+  });
+
+  after(async function () {
+    /** SUCCESS CONDITIONS - NO NEED TO CHANGE ANYTHING HERE */
+
+    // Player must have used a single transaction
+    expect(await ethers.provider.getTransactionCount(player.address)).to.eq(1);
+
+    for (let i = 0; i < users.length; i++) {
+      let wallet = await walletRegistry.wallets(users[i]);
+
+      // User must have registered a wallet
+      expect(wallet).to.not.eq(
+        ethers.constants.AddressZero,
+        "User did not register a wallet"
+      );
+
+      // User is no longer registered as a beneficiary
+      expect(await walletRegistry.beneficiaries(users[i])).to.be.false;
+    }
+
+    // Player must own all tokens
+    expect(await token.balanceOf(player.address)).to.eq(
+      AMOUNT_TOKENS_DISTRIBUTED
+    );
+  });
 });
