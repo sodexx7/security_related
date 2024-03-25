@@ -33,7 +33,7 @@ describe(NAME, function () {
 
         it("conduct your attack here", async function () {
             // claim second Ether,malleability reference: https://www.rareskills.io/post/smart-contract-security Signature malleability
-
+            
             const v2 = 27; // flip v 28 =>27
             const r = "0xf202ed96ca1d80f41e7c9bbe7324f8d52b03a2c86d9b731a1d99aa018e9d77e7";
             // const s = "0x7477cb98813d501157156e965b7ea359f5e6c108789e70d7d6873e3354b95f69";

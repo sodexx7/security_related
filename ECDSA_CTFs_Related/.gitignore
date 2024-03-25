@@ -12,3 +12,7 @@ docs/
 
 # Dotenv file
 .env
+
+
+GetAnotherMsgAndSignature/node_modules
+GetAnotherMsgAndSignature/.env
