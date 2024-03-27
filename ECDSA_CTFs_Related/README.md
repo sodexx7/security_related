@@ -84,3 +84,9 @@
         * then get the r,s and message, just try v =27 or v= 28 get the valid signature.
 
 - forge test --match-contract Week22Exercise4Test
+
+### Others
+
+1. [Why should do on-chain hash](OnChainHash.md)
+
+2. TODO, [the math generating another valid hashValue and signature by public-key](GenerateHashValueAndSIgnauture.md)
