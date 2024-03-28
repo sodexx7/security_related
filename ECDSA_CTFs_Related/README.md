@@ -90,3 +90,5 @@
 1. [Why should do on-chain hash](OnChainHash.md)
 
 2. TODO, [the math generating another valid hashValue and signature by public-key](GenerateHashValueAndSIgnauture.md)
+
+3. TODO, [the math of malleability](MalleabilityMath.md)
