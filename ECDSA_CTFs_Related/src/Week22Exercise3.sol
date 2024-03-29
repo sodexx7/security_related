@@ -1,25 +1,25 @@
-// pragma solidity ^0.8.23;
-// import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
-// import "@openzeppelin/contracts/access/Ownable.sol";
+pragma solidity ^0.8.23;
+import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-// contract Week22Exercise3 is Ownable {
-//     using ECDSA for bytes32;
+contract Week22Exercise3 is Ownable {
+    using ECDSA for bytes32;
 
-//     mapping(address => uint256) public nonceForAddress;
+    mapping(address => uint256) public nonceForAddress;
 
-//     function claimAirdrop(
-//         uint256 amount,
-//         address to,
-//         uint8 v,
-//         bytes32 r,
-//         bytes32 s
-//     ) public {
-//         bytes32 hash_ = keccak256(
-//             abi.encodePacked(nonceForAddress[to], amount, to)
-//         );
-//         nonceForAddress[to]++;
+    function claimAirdrop(
+        uint256 amount,
+        address to,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) public {
+        bytes32 hash_ = keccak256(
+            abi.encodePacked(nonceForAddress[to], amount, to)
+        );
+        nonceForAddress[to]++;
 
-//         address recovered = ecrecover(hash_, v, r, s); // should as  hash_.recover(v, r, s) == recovered?
-//         require(recovered == owner(), "invalid signature");
-//     }
-// }
+        address recovered = ecrecover(hash_, v, r, s);
+        require(recovered == owner(), "invalid signature");
+    }
+}

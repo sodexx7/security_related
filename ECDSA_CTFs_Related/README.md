@@ -11,13 +11,13 @@
 
     - npx hardhat test test/DoubleTake.js
 
-3.  Week22Exercise2 **TODO should check**
+3.  Week22Exercise2
 
     - [Week22Exercise2](./src/Week22Exercise2.sol)
     - the valid signature can be find in https://optimistic.etherscan.io/address/0x0000000ccc7439f4972897ccd70994123e0921bc,
     - forge test --match-contract Week22Exercise2Test
 
-4.  Week22Exercise3 **TODO should check**
+4.  Week22Exercise3
 
     - The workflow of approve one user can get the airdrop as below two steps:
 
@@ -48,6 +48,15 @@
          bytes32 s
       ) public {
       ```
+
+    **Add medium severity weakness**
+
+    - if owner call renounceOwnership(), the address's owner will become address(0), then any unvalid signature along with hash can claim the airdrop. Because
+      ecrecover(hash\_, v, r, s) will return address(0) if input unvalid signature,.
+
+    ```
+      address recovered = ecrecover(hash_, v, r, s);
+    ```
 
 5.  [Week22Exercise4](src/Week22Exercise4.sol)
 
